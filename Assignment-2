@@ -1,0 +1,16 @@
+var spinner = (function(){
+    var value = 0;
+
+    function increment(){
+        return ++value;
+    }
+
+    function decrement(){ 
+        return --value;
+    }
+
+    return {
+        increment : increment,
+        decrement : decrement
+    }
+})();
