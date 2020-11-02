@@ -6,7 +6,7 @@ function sum(){
   return total;
 }
 
-console.log(sum(7,8,10));
+
 
 //then call
 sum(3,4,5);
