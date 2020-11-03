@@ -24,11 +24,11 @@
       class SalaryCalculator extends React.Component {
        //state
        state = {
-           basic:'',
-           hra:'',
-           da:'',
-           tax:'',
-           salary:''
+           basic:0,
+           hra:0,
+           da:0,
+           tax:0,
+           salary:0
 
        };
          
@@ -36,6 +36,8 @@
           
            const {salaryState} = this.state
            const finalSalary = parseInt(salaryState.basic) + parseInt(salaryState.hra) + parseInt(salaryState.da)
+           const tax = parseInt(finalSalary.tax)
+           finalSalary = finalSalary - 0.01*tax*finalSalary
            this.setState({salary:finalSalary})
         };
         onChangeBasic = (event) => {
