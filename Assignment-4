@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Products</title>
+    <style>
+       .spacing{
+          color: blue;
+          padding-left: 10px;
+       }
+    </style>
     <script src="react.development.js"></script>
     <script src="react-dom.development.js"></script>
     <script src="babel.min.js"></script>
@@ -41,7 +47,7 @@
                 <div>
                      <h1>Animal Names are</h1>
                      <input type='text' onChange={this.addValueChanged}/>
-                     <input type='button' onClick={this.addValue}/>
+                     <input className='spacing' type='button' value='AddNew' onClick={this.addValue}/>
                      <hr/>
 
                      <ol>
