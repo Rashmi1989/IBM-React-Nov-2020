@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Products</title>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <script type="text/babel">
+        class Products extends React.Component{
+             
+              state = {
+                  animalList:[],
+                  newValue:''
+              }
+              addValueChanged =(event) =>{
+                 let newProd = event.target.value
+                 this.setState({newValue:newProd})
+               }
+
+               addValue =() =>{
+                let animalList1 =[...this.state.animalList]
+                
+               
+                  if (animalList1.indexOf(this.state.newValue) > -1) {
+                             //In the array!
+                     window.alert('value present')
+                 }  else {
+                    //Not in the array
+                    animalList1.push(this.state.newValue)
+                }
+                this.setState({animalList:animalList1})
+                console.log(this.state)
+               }
+            render(){
+               const list = [...this.state.animalList] 
+               const finalList = list.map((animalName,index)=> (<li key={index}>{animalName}</li>)); 
+               return(
+                <div>
+                     <h1>Animal Names are</h1>
+                     <input type='text' onChange={this.addValueChanged}/>
+                     <input type='button' onClick={this.addValue}/>
+                     <hr/>
+
+                     <ol>
+                        {finalList}
+                        </ol>
+                     
+                </div>    
+               )
+            }
+        }
+
+        ReactDOM.render(<Products/>, document.getElementById('root'));
+    </script>
+</head>
+<body>
+    <div id="root">
+        
+    </div>
+</body>
+</html>
