@@ -34,8 +34,8 @@
          
         onClickCalculate=() => {
           
-           const {salaryState} = this.state
-           const finalSalary = parseInt(salaryState.basic) + parseInt(salaryState.hra) + parseInt(salaryState.da)
+           const { basic, hra, da, tax } = this.state;
+           const finalSalary = parseInt(basic) + parseInt(hra) + parseInt(da)
            const tax = parseInt(finalSalary.tax)
            finalSalary = finalSalary - 0.01*tax*finalSalary
            this.setState({salary:finalSalary})
