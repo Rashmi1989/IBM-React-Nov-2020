@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <script src="redux.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
+    <script type="text/babel">
+        class Calculator extends React.Component{
+            state = {
+                startVal :0,
+                endVal :0,
+                resultValue : 0
+            }
+
+            onAdd=() =>{
+                 
+
+            };
+            render(){
+                const { value, addition, subtraction , multiplication, division } = this.props,
+                    { startVal , endVal } = this.state
+                return(
+                    <div>
+                        <h1>Calculator</h1>
+                        <hr/>
+                        <input type="number" name="" id="" onChange={ evt => this.setState({ startVal : parseInt(evt.target.value)})}/>
+                        <input type="number" name="" id="" onChange={ evt => this.setState({ endVal : parseInt(evt.target.value)})}/>
+                        <br/>
+                        <input type="button" value="ADD" onClick={() => addition(startVal,endVal)} />
+                        <input type="button" value="SUBTRACT" onClick={() => subtraction(startVal,endVal)}/>
+                        <input type="button" value="MULTIPLY" onClick={() => multiplication(startVal,endVal)}/>
+                        <input type="button" value="DIVIDE" onClick={() => division(startVal,endVal)}/>
+                        <div>[{value}]</div>
+                    </div>
+                )
+            }
+        }
+        function calculatorReducer(currentState = 0, action){
+            if (action.type === 'ADD') return action.payload.startVal + action.payload.endVal;
+            if (action.type === 'SUBTRACT') return action.payload.startVal - action.payload.endVal;
+            if (action.type === 'MULTIPLY') return action.payload.startVal * action.payload.endVal;
+            if (action.type === 'DIVIDE') return action.payload.startVal / action.payload.endVal;
+            return currentState;
+        }
+        const calculatorActionCreators = {
+            addition(startVal,endVal){
+                const action = { type : 'ADD', payload :{startVal,endVal}};
+                return action;
+            },
+            subtraction(startVal,endVal){
+                const action = { type : 'SUBTRACT', payload :{startVal,endVal}};
+                return action;
+            },
+            multiplication(startVal,endVal){
+                const action = { type : 'MULTIPLY', payload :{startVal,endVal}};
+                return action;
+            },
+            division(startVal,endVal){
+                const action = { type : 'DIVIDE', payload : {startVal,endVal} };
+                return action;
+            }
+        }
+        const store = Redux.createStore(calculatorReducer);
+        const calculatorActionDispatchers = Redux.bindActionCreators(calculatorActionCreators, store.dispatch);
+        function renderCalculator(){
+            const value = store.getState();
+            ReactDOM.render(
+                <Calculator value={value} {...calculatorActionDispatchers} />
+            , document.getElementById('root'));
+        }
+        renderCalculator();
+        store.subscribe(renderCalculator);
+    </script>
+</head>
+<body>
+        <div id="root">
+        </div>
+</body>
+</html>
